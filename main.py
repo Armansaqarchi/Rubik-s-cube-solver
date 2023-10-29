@@ -52,7 +52,7 @@ if __name__ == '__main__':
     from ursina import *
     from rubik import Rubik
 
-    # start game
+    # start game8c273d0c75233e272dd96c0e9b8657a1
     app = Ursina(size=(1280, 720))
     rubik = Rubik()
 

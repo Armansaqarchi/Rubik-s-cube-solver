@@ -19,7 +19,6 @@ def solved_state():
 
 
 def next_state(state, action):
-
     state = np.copy(state)
 
     # left to up
