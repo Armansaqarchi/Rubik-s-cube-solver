@@ -10,6 +10,12 @@ def solved_location():
     ], dtype=np.uint8)
 
 
+def main():
+    for i in range(2):
+        for j in range(2):
+            for k in range(2):
+                print(solved_location()[i][j][k], [i, j, k])
+
 def next_location(location, action):
 
     location = np.copy(location)
@@ -66,10 +72,11 @@ def next_location(location, action):
 
 
 if __name__ == '__main__':
-    initial_location = solved_location()
-    print('intial location:')
-    print(initial_location)
-    print()
-    child_location = next_location(initial_location, action=4)
-    print('next location:')
-    print(child_location)
+    # initial_location = solved_location()
+    # print('intial location:')
+    # print(initial_location)
+    # print()
+    # child_location = next_location(initial_location, action=4)
+    # print('next location:')
+    # print(child_location)
+    main()
