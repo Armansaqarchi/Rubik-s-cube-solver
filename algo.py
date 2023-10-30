@@ -34,8 +34,7 @@ def solve(init_state, init_location, method):
         return Astar(init_state, init_location)
 
     elif method == 'BiBFS':
-        ...
-    
+        return BiBFS(init_state)
     else:
         return []
     
@@ -66,6 +65,7 @@ def IDS_DFS(init_state):
 
 def Astar(state, init_location):
     from queue import PriorityQueue
+
     q = PriorityQueue()
     count = 0
     visited = {}
@@ -102,6 +102,47 @@ def heuristic(location):
     return manhattan / 4
 
 
+
+def BiBFS(state):
+
+    def find_common(s_visited, e_visited):
+        for i in s_visited:
+            if i in e_visited:
+                return i
+        return -1
+        
+    final_state = solved_state()
+    start_queue = [state]
+    end_queue = [final_state]
+    visited_start = {str(state) : []}
+    visited_end = {str(final_state) : []}
+    while(True):
+        cur_state_start = start_queue.pop(0)
+        cur_state_end = end_queue.pop(0)
+        for i in range(1, 13):
+            next_s_state = next_state(cur_state_start, i)
+            if not str(next_s_state) in visited_start:
+                start_queue.append(next_s_state)
+                visited_start[str(next_s_state)] = visited_start[str(cur_state_start)] + [i]
+            next_f_state = next_state(cur_state_end, i)
+            if not str(next_f_state) in visited_end:
+                end_queue.append(next_f_state)
+                visited_end[str(next_f_state)] = visited_end[str(cur_state_end)] + [i]
+        common = find_common(visited_start, visited_end)
+        if common != -1:
+            visited_end[common].reverse()
+            reversed_track = reverse_moves(visited_end[common])
+            return visited_start[common] + reversed_track
+        
+
+
+def reverse_moves(moves):
+    track = []
+    for i in moves:
+        i = (i+5) % 12 + 1
+        track.append(i)
+    return track 
+        
 
 
 
